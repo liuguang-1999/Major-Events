@@ -27,6 +27,9 @@ var tabulation = {
      */
     upto: function (type, page) {
         return $.get(APILIST.user_search_get, { "type": type, "page": page })
+    },
+    article: function (id) {
+        return $.get(APILIST.user_article_get, { 'id': id })
     }
 }
 

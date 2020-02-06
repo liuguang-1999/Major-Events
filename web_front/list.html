@@ -51,7 +51,7 @@
         <div class="left_con setfr">
 
             <div class="list_title">
-                <h3>科 技</h3>
+                <h3 id="catName">科学</h3>
             </div>
             <!-- 新闻列表 -->
             <div id="lastes"></div>
@@ -154,8 +154,8 @@
 
     {{each data item}}
     <div class="common_news_list">
-        <a href="article.html?{{item.id}}" class="list_pic"><img src="{{item.cover}}" alt=""></a>
-        <h4><a href="article.html?{{item.id}}">{{item.title}}</a></h4>
+        <a href="article.html?id={{item.id}}" class="list_pic"><img src="{{item.cover}}" alt=""></a>
+        <h4><a href="article.html?id={{item.id}}">{{item.title}}</a></h4>
         <p>{{item.content}}</p>
         <div class="new_info">
             <span>标签：{{item.type}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;阅读( {{item.read}}
@@ -172,13 +172,18 @@
     //  点击 类别获取到的 ID 赋值给了a ！！！
 
     //  文章类别 渲染
-    tabulation.category().then(function (res) {
+    tabulation.category().then(function (ser) {
         //  给服务器 里面的res添加一个参数curId 赋值为a里边的数字 ！！！
-        res.curId = a
+        ser.curId = a
         // console.log(res);
-        var str = template("load", res);
+        var str = template("load", ser);
         $("#navi").append(str);
         $("#navt").append(str)
+        ser.data.forEach(item => {
+            if (item.id == a) {
+                $("#catName").html(item.name)
+            }
+        });
     })
     //  列表页 获取列表数据
     var curpage = 1;
@@ -187,6 +192,7 @@
         tabulation.upto(a, curpage).then(function (ser) {
             console.log(ser);
             var str = template("lastest", ser);
+            $("#lastes").empty();
             $("#lastes").append(str)
             // 分页的基础代码
             // 如果只有一页，则不需要显示分页条
@@ -205,7 +211,8 @@
                 onPageClick: function (event, page) {
                     // page是当前用户点击的页码
                     // 更新全局变量，重新查询
-                    curPage = page
+
+                    curpage = page
                     // 为什么不需要传入参数？ 它是如何达到获取指定页的数据 功能？
                     // 全局变量
                     getAndShow();

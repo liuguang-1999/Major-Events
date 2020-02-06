@@ -15,5 +15,7 @@ var APILIST = {
     // 获取热门文章排行
     user_rank_get: BASEURL + "/rank",
     // 最新文章
-    user_lastest_get: BASEURL + "/lastest"
+    user_lastest_get: BASEURL + "/lastest",
+    // 文章的详情
+    user_article_get: BASEURL + "/article"
 };
