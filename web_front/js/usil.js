@@ -18,8 +18,16 @@ var tabulation = {
     // 最新文章
     lastest: function () {
         return $.get(APILIST.user_lastest_get)
+    },
+    //  列表页 获取列表数据
+    /**
+     * 类型编号type 
+     * 页码page
+     * 
+     */
+    upto: function (type, page) {
+        return $.get(APILIST.user_search_get, { "type": type, "page": page })
     }
-
 }
 
 
