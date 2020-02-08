@@ -231,11 +231,13 @@
     var a = window.location.search.substr(4)
     // 内容详情
     tabulation.article(a).then(function (ser) {
-        var t = ser.data
-        $('#author').html(t.author);
-        $('#comment').html(t.comment);
+        console.log(ser);
+
+        let [author, comment, content, date, read, title, type_name] = ser.data
+        $('#author').html(author);
+        $('#comment').html(comment);
         $('#content').html(t.content);
-        $('#date').html(t.date);
+        $('#date').html(date);
         //上，下文章导航
         // 有的文章有一篇，有的可能没有，所以要先判断一下。
         if (t.prev) {
@@ -252,9 +254,9 @@
         }
 
 
-        $('#read').html(t.read);
-        $('#title').html(t.title);
-        $('#type_name').html(t.type_name);
+        $('#read').html(read);
+        $('#title').html(title);
+        $('#type_name').html(type_name);
 
 
     })

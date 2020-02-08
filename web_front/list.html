@@ -190,7 +190,6 @@
     getAndShow()
     function getAndShow() {
         tabulation.upto(a, curpage).then(function (ser) {
-            console.log(ser);
             var str = template("lastest", ser);
             $("#lastes").empty();
             $("#lastes").append(str)
